@@ -1,26 +1,67 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<div>
+  <h1 v-text="greatting"></h1>
+  <h1 :class="!isPromoted && 'text-danger text' " v-text="greatting"></h1>
+  <button @click="addingNumber"> add</button>
+  <h1>{{ num }}</h1>
+  <form>
+    <div>
+      <label for="Name">Name:</label>
+      <input type="text" v-model="formValues.name">
+    </div>
+    <div>
+      <label for="Name">Phone:</label>
+      <input type="number" v-model="formValues.phone">
+    </div>
+    <div>
+      <label for="cars">Choose a Country:</label>
+        <select v-model="formValues.country">
+          <option value="">Select A Country</option>
+          <option value="Bangladesh">Bangladesh</option>
+          <option value="India">India</option>
+          <option value="Pakistan">Pakistan</option>
+        </select>
+    </div>
+  </form>
+  <p>{{formValues.name}}</p>
+  <p>{{formValues.phone}}</p>
+  <p>{{formValues.country}}</p>
+</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data(){
+    return{
+      greatting:"Hello Vue!!",
+      isPromoted: false,
+      num : 0,
+      formValues:{
+        name:'',
+        phone:'',
+        country:''
+      }
+    }
+  },
+  methods:{
+    addingNumber(){
+      this.num +=1
+      if(this.num===10 && this.num>0){
+        this.num -=1
+      }
+    }
   }
+
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+.text-danger{
+  color: red;
+}
+.text{
+  text-decoration: underline;
 }
 </style>
